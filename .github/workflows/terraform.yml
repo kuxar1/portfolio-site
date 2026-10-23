@@ -1,0 +1,58 @@
+name: Terraform
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'infra/**'
+      - '.github/workflows/terraform.yml'
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: terraform-portfolio-site
+  cancel-in-progress: false
+
+env:
+  TF_IN_AUTOMATION: "true"
+  TF_INPUT: "false"
+
+jobs:
+  terraform:
+    name: Terraform
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: infra
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "1.17.0"
+          
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "1.17.0"
+
+      - name: configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN}}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Terraform fmt
+        run: terraform fmt -check -recursive
+
+      - name: Terraform init
+        run: terraform init
+
+      - name: Terraform validate
+        run: terraform validate
+
+      - name: Terraform plan
+        run: terraform plan
