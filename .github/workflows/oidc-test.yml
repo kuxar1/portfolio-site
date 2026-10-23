@@ -14,7 +14,6 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v6.3.0
         with:
           role-to-assume: ${{ vars.AWS_ROLE_ARN}}
-          role-session-name: samplerolesession
           aws-region: ${{ vars.AWS_REGION }}
 
       - name: Check AWS identity
