@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "github_oidc_assume_role" {
       identifiers = [aws_iam_openid_connect_provider.portfolio_site.arn]
     }
     condition {
-      test     = "StringLike"
+      test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:aud"
       values   = ["sts.amazonaws.com"]
     }
