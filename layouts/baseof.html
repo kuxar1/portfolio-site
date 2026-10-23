@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ if and .Summary (not .IsHome) }}{{ .Summary | plainify }}{{ else }}{{ site.Params.description }}{{ end }}">
+  {{ with resources.Get "css/style.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+  {{ end }}
+</head>
+<body>
+  <header class="wrap nav">
+    <a href="/" class="logo">devopsing<span>.dev</span></a>
+    <nav><a href="/projects/">Projects</a></nav>
+  </header>
+  <main class="wrap">{{ block "main" . }}{{ end }}</main>
+  <footer class="wrap">
+    {{ with site.Params.github }}<a href="{{ . }}">GitHub</a>{{ end }}
+    {{ with site.Params.gitlab }}<a href="{{ . }}">GitLab</a>{{ end }}
+    {{ with site.Params.linkedin }}<a href="{{ . }}">LinkedIn</a>{{ end }}
+    {{ with site.Params.email }}<a href="mailto:{{ . }}">{{ . }}</a>{{ end }}
+  </footer>
+</body>
+</html>

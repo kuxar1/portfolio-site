@@ -1,0 +1,18 @@
+{{ define "main" }}
+<article class="project">
+  <h1>{{ .Title }}</h1>
+  {{ with .Summary }}<p class="lead">{{ . | plainify }}</p>{{ end }}
+  <dl class="facts">
+    {{ with .Params.status }}<div><dt>Status</dt><dd>{{ partial "status.html" $ }}</dd></div>{{ end }}
+    {{ with .Params.ci }}<div><dt>CI/CD</dt><dd>{{ . }}</dd></div>{{ end }}
+    {{ with .Params.cost }}<div><dt>Cost</dt><dd>{{ . }}</dd></div>{{ end }}
+    {{ with .Params.stack }}<div><dt>Stack</dt><dd><ul class="tags">{{ range . }}<li>{{ . }}</li>{{ end }}</ul></dd></div>{{ end }}
+  </dl>
+  <p class="links">
+    {{ with .Params.repo }}<a class="btn" href="{{ . }}">Source code</a>{{ end }}
+    {{ with .Params.demo }}<a class="btn" href="{{ . }}">Live demo</a>{{ end }}
+    {{ with .Params.post }}<a class="btn" href="{{ . }}">Deep dive</a>{{ end }}
+  </p>
+  {{ .Content }}
+</article>
+{{ end }}

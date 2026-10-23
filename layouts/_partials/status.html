@@ -1,0 +1,3 @@
+{{ $s := .Params.status | default "wip" }}
+{{ $labels := dict "live" "Live" "down" "Demo torn down" "wip" "In progress" }}
+<span class="status status-{{ $s }}">{{ index $labels $s }}</span>

@@ -1,0 +1,12 @@
+baseURL = "https://devopsing.dev/"
+locale = "en"
+title = "devopsing.dev"
+disableKinds = ["taxonomy", "term"]
+enableRobotsTXT = true
+
+[params]
+author = "Oleksandr Kukhar"
+description = "Cloud DevOps portfolio: AWS, Terraform, GitHub Actions, GitLab CI."
+github = "https://github.com/kuxar1"
+linkedin = "https://www.linkedin.com/in/kukhar-oleksandr/"
+email = "me@devopsing.dev"

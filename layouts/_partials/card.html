@@ -1,0 +1,6 @@
+<a class="card" href="{{ .RelPermalink }}">
+  <h3>{{ .Title }}</h3>
+  <p>{{ .Summary | plainify }}</p>
+  <ul class="tags">{{ range .Params.stack }}<li>{{ . }}</li>{{ end }}</ul>
+  {{ partial "status.html" . }}
+</a>
