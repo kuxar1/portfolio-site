@@ -1,7 +1,3 @@
-locals {
-  s3_origin_id = "DevOpsingSiteS3Origin"
-}
-
 resource "aws_cloudfront_function" "index_rewrite" {
   name    = "devopsing-site-index-rewrite"
   runtime = "cloudfront-js-2.0"
@@ -63,6 +59,7 @@ resource "aws_cloudfront_distribution" "devopsing_site" {
   enabled         = true
   is_ipv6_enabled = true
   price_class     = "PriceClass_100"
+  aliases         = [var.domain_name]
 
   default_cache_behavior {
     allowed_methods        = ["GET", "HEAD"]
@@ -85,7 +82,14 @@ resource "aws_cloudfront_distribution" "devopsing_site" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn      = aws_acm_certificate_validation.site.certificate_arn
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
-
+  custom_error_response {
+    error_code            = 403
+    response_code         = 404
+    response_page_path    = "/404.html"
+    error_caching_min_ttl = 0
+  }
 }

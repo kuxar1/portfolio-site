@@ -1,11 +1,16 @@
 provider "aws" {
   region = "eu-central-1"
-
   default_tags {
-    tags = {
-      Project    = "portfolio-site"
-      ManagedBy  = "terraform"
-      Repository = "github.com/kuxar1/portfolio-site"
-    }
+    tags = local.common_tags
   }
 }
+
+provider "aws" {
+  alias  = "us_east_1"
+  region = "us-east-1"
+  default_tags {
+    tags = local.common_tags
+  }
+}
+
+provider "cloudflare" {}

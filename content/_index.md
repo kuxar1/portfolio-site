@@ -2,7 +2,7 @@
 title: "Home"
 ---
 
-# Hi, I'm Your Name
+# Hi, I'm Oleksandr Kukhar
 
 Cloud DevOps engineer focused on **AWS**, **Terraform** and **CI/CD** with GitHub Actions and GitLab CI.
 
