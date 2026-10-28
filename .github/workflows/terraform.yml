@@ -1,9 +1,7 @@
 name: Terraform
+
 on:
   pull_request:
-    paths:
-      - 'infra/**'
-      - '.github/workflows/terraform.yml'
 
 permissions:
   id-token: write
@@ -17,10 +15,33 @@ concurrency:
 env:
   TF_IN_AUTOMATION: "true"
   TF_INPUT: "false"
+  HUGO_VERSION: "0.168.0"
 
 jobs:
-  terraform:
-    name: Terraform
+  hugo-build:
+    name: Setup and built hugo
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+        - name: Install Hugo
+          run: |
+            curl -fsSL "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-amd64.deb" -o /tmp/hugo.deb
+            sudo dpkg -i /tmp/hugo.deb
+            hugo version
+
+        - name: Checkout repository
+          uses: actions/checkout@v7
+
+        - name: Build Hugo site
+          run: hugo --gc --minify
+      
+        - name: Check if Hugo build was successful
+          run:  test -f public/index.html && test -f public/404.html
+
+  terraform-plan:
+    name: Terraform plan
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -37,7 +58,7 @@ jobs:
         with:
           terraform_version: "1.17.0"
 
-      - name: configure AWS credentials
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: ${{ vars.AWS_PLAN_ROLE_ARN }}
