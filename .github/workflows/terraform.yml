@@ -18,7 +18,7 @@ env:
   HUGO_VERSION: "0.168.0"
 
 jobs:
-  hugo:
+  hugo-build:
     name: Setup and built hugo
     runs-on: ubuntu-latest
     defaults:
@@ -40,8 +40,8 @@ jobs:
         - name: Check if Hugo build was successful
           run:  test -f public/index.html && test -f public/404.html
 
-  terraform:
-    name: Terraform check
+  terraform-plan:
+    name: Terraform plan
     runs-on: ubuntu-latest
     defaults:
       run:
