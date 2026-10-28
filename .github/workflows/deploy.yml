@@ -67,6 +67,10 @@ jobs:
         run: |
           echo "bucket=$(terraform output -raw site_bucket_name)" >> "$GITHUB_OUTPUT"
           echo "distribution_id=$(terraform output -raw cloudfront_distribution_id)" >> "$GITHUB_OUTPUT"
+      - name: test
+        run: ls -al
+      - name: pwd
+        run: pwd
 
       - name: Deploy to S3
         env:
