@@ -17,7 +17,8 @@ body {
   font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 a { color: var(--accent); }
-.wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+/* Horizontal-only so it never overrides vertical spacing of .nav/footer; margin-based gutter keeps the footer border aligned with the text */
+.wrap { width: min(828px, 100% - 32px); margin-inline: auto; }
 
 .nav { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; padding-bottom: 24px; }
 .nav a { text-decoration: none; color: var(--fg); }
