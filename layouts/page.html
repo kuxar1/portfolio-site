@@ -13,6 +13,13 @@
     {{ with .Params.demo }}<a class="btn" href="{{ . }}">Live demo</a>{{ end }}
     {{ with .Params.post }}<a class="btn" href="{{ . }}">Deep dive</a>{{ end }}
   </p>
+  {{ if eq .Section "projects" }}
+    {{ with .Resources.Get "diagram.svg" }}
+      <figure class="diagram"><img src="{{ .RelPermalink }}" alt="Architecture diagram: {{ $.Title }}"></figure>
+    {{ else }}
+      <div class="diagram diagram-placeholder">Architecture diagram coming soon</div>
+    {{ end }}
+  {{ end }}
   {{ .Content }}
 </article>
 {{ end }}
