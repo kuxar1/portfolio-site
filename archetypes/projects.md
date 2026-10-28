@@ -12,16 +12,14 @@ weight: 10
 draft: true
 ---
 
-## Architecture
-
-![Architecture](diagram.svg)
+<!-- Architecture diagram: put diagram.svg next to this file, the page picks it up automatically -->
 
 ## Key decisions
 
-- **Decision** — why, and what was traded off.
+- **Decision**: why, and what was traded off.
 
-## CI/CD pipeline
+## CI/CD
 
-`lint → test → plan → apply`
+## Problems I hit
 
-## Lessons learned
+## What's next

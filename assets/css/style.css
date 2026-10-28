@@ -59,6 +59,10 @@ a { color: var(--accent); }
 .btn { padding: 6px 14px; border: 1px solid var(--accent); border-radius: 6px; text-decoration: none; }
 .btn:hover { background: var(--accent); color: var(--bg); }
 .project img { max-width: 100%; height: auto; }
+.diagram { margin: 24px 0; }
+/* White backing keeps dark-on-transparent diagrams readable in dark mode */
+.diagram img { display: block; background: #fff; border-radius: 10px; padding: 12px; }
+.diagram-placeholder { padding: 48px 16px; text-align: center; color: var(--muted); border: 1px dashed var(--line); border-radius: 10px; font: .9rem var(--mono); }
 code { font-family: var(--mono); font-size: .9em; background: var(--tag); padding: 1px 5px; border-radius: 4px; }
 
 footer { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 64px; padding-top: 24px; padding-bottom: 32px; border-top: 1px solid var(--line); font-size: .9rem; }
